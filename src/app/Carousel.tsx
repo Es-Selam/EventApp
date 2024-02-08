@@ -38,8 +38,8 @@ const Carousel = () => {
     }, [events.length]);
 
     return (
-        <div className="w-full max-w-xl overflow-hidden rounded-lg shadow-lg p-4 bg-white">
-            <h3 className="text-2xl font-bold">{events[currentIndex].title}</h3>
+        <div className="w-full p-80 overflow-hidden rounded-lg shadow-lg bg-white text-center">
+            <p className="text-2xl font-bold text-amber-800">{events[currentIndex].title}</p>
             <p className="mt-2 text-gray-600">{events[currentIndex].description}</p>
             <p className="mt-2 text-gray-500">{events[currentIndex].location}</p>
             <p className="mt-1 text-gray-500">{events[currentIndex].time}</p>
