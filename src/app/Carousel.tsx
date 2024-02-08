@@ -4,10 +4,10 @@ import React, { useState, useEffect } from 'react';
 const events = [
     {
         id: 1,
-        title: 'Event 1',
-        description: 'Description for Event 1',
-        location: 'Location 1',
-        time: '12:00 PM',
+        title: 'Generalversammlung',
+        description: 'Sie sind herzlich eingeladen zur ordentlichen Generalversammlung für das Jahr 2023/2024. Die Versammlung findet statt am Samstag, 10. Februar 2024, um 20:00 Uhr, nach dem Ishaa-Gebet.',
+        location: 'Es-Selam',
+        time: '9.2.2024 19:30',
     },
     {
         id: 2,
@@ -38,11 +38,13 @@ const Carousel = () => {
     }, [events.length]);
 
     return (
-        <div className="w-full p-80 overflow-hidden rounded-lg shadow-lg bg-white text-center">
-            <p className="text-2xl font-bold text-amber-800">{events[currentIndex].title}</p>
-            <p className="mt-2 text-gray-600">{events[currentIndex].description}</p>
-            <p className="mt-2 text-gray-500">{events[currentIndex].location}</p>
-            <p className="mt-1 text-gray-500">{events[currentIndex].time}</p>
+        <div className="w-full overflow-hidden rounded-lg shadow-lg text-center
+         bg-[#1b1b1c] grid grid-cols-1">
+            <div className="p-4 text-8xl font-bold text-amber-800 border-b-gray-950 border-b-2">{events[currentIndex].title}</div>
+            <div className="py-60 text-gray-600 text-6xl">{events[currentIndex].description}</div>
+            <div className="border-t-gray-950 border-t-2">
+                <div className="p-2 text-gray-500">{events[currentIndex].location}, {events[currentIndex].time}</div>
+            </div>
         </div>
     );
 };
