@@ -32,8 +32,17 @@ const Home = () => {
     };
 
     useEffect(() => {
+        // Fetch events immediately when the component mounts
         fetchEvents();
-    }, []);
+
+        // Set up a timer to refetch the events every 5 minutes
+        const fetchInterval = setInterval(() => {
+            fetchEvents();
+        }, 60000); // 300000 milliseconds = 5 minutes
+
+        // Clean up the interval when the component unmounts
+        return () => clearInterval(fetchInterval);
+    }, []); // The empty dependency array means this effect runs once on mount and cleanup on unmount
 
     useEffect(() => {
         const intervalTime = 30000; // 30 seconds
