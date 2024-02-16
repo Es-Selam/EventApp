@@ -15,8 +15,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="de">
-      <body className="font-mono">{children}</body>
+    <html lang="de" className="dark">
+      <body className="font-mono bg-gray-300 dark:bg-[#212121]">{children}</body>
     </html>
   );
 }
