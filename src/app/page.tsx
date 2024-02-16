@@ -17,7 +17,7 @@ export default function Home() {
     // Function to fetch events
     const fetchEvents = async () => {
         try {
-            const response = await fetch('YOUR_API_ENDPOINT'); // Replace YOUR_API_ENDPOINT with your actual endpoint
+            const response = await fetch('http://localhost:8000/events'); // Replace YOUR_API_ENDPOINT with your actual endpoint
             const data: Event[] = await response.json();
             setEvents(data);
             setCurrentEventIndex(0); // Reset to the first event after fetching new events
