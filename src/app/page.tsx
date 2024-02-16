@@ -37,7 +37,6 @@ export default function Home() {
                 icon={faClock}
                 text="13:00 Uhr"
             />
-            {/*<Carousel />*/}
         </main>
     );
 }
