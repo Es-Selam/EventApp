@@ -1,6 +1,12 @@
 'use client'
 import React from 'react';
-import Carousel from "@/app/Carousel";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { config } from "@fortawesome/fontawesome-svg-core";
+import { faCalendarDays, faClock, faLocationDot} from "@fortawesome/free-solid-svg-icons";
+import IconInfo from "@/app/IconInfo";
+// Tell Font Awesome to skip adding the CSS automatically
+// since it's already imported above
+config.autoAddCss = false;
 
 export default function Home() {
     return (
@@ -15,19 +21,29 @@ export default function Home() {
             <div className="p-20 flex items-center justify-center
             border-4 col-span-full row-span-4 border-green-400 text-center
             sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-medium">
-                Wahrlich, wir gehören Allah und zu Ihm kehren wir zurück. Liebe Brüder und Schwestern, wir trauern um den Verlust von Muhamed Memeti, der heute von uns gegangen ist. Die Beerdigung findet statt in Niederuzwil. Möge Allah ihm Frieden schenken und seine Familie in Geduld und Stärke umhüllen.
-            </div>
-            <div className="flex items-center justify-center border-4 border-red-400 text-center">
-                Datum: 12.02.2024
-            </div>
-            <div className="flex items-center justify-center border-4 border-teal-600 text-center">
-                Zeit: 13:00 Uhr
-            </div>
-            <div className="flex items-center justify-center border-4 border-fuchsia-800 text-center">
-                Ort: Niederuzwil
+                Wahrlich, wir gehören Allah und zu Ihm kehren wir zurück. Liebe Brüder und Schwestern, wir trauern um
+                den Verlust von Muhamed Memeti, der heute von uns gegangen ist. Die Beerdigung findet statt in
+                Niederuzwil. Möge Allah ihm Frieden schenken und seine Familie in Geduld und Stärke umhüllen.
             </div>
 
-            {/*<h1 className="text-4xl font-bold">Welcome to Es-Selam Events!</h1>*/}
+            <IconInfo
+                icon={faCalendarDays}
+                text="12.02.2024"
+                additionalClasses="border-red-800"
+            />
+
+            <IconInfo
+                icon={faLocationDot}
+                text="Niederuzwil"
+                additionalClasses="border-green-400"
+            />
+
+            <IconInfo
+                icon={faClock}
+                text="13:00 Uhr"
+                additionalClasses="border-red-400"
+            />
+
             {/*<Carousel />*/}
         </main>
     );
