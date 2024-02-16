@@ -1,59 +1,63 @@
 'use client';// Import React and necessary hooks
 import React, { useEffect, useState } from 'react';
-// Import styles and icons
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import { config, IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import { config } from "@fortawesome/fontawesome-svg-core";
 import { faCalendarDays, faClock, faLocationDot } from "@fortawesome/free-solid-svg-icons";
-import IconInfo from "@/app/IconInfo"; // Adjust the import path as necessary
+import IconInfo from "@/app/IconInfo"; // Ensure this path is correct
 
-// Tell Font Awesome to skip adding the CSS automatically
 config.autoAddCss = false;
 
-export default function Home() {
-    // Initialize the events state with an empty array of Event type
+interface Event {
+    title: string;
+    description: string;
+    date: string;
+    location: string;
+    time: string;
+}
+
+const Home = () => {
     const [events, setEvents] = useState<Event[]>([]);
     const [currentEventIndex, setCurrentEventIndex] = useState(0);
+    const [progress, setProgress] = useState(0);
 
-    // Function to fetch events
     const fetchEvents = async () => {
         try {
-            const response = await fetch('http://localhost:8000/events'); // Replace YOUR_API_ENDPOINT with your actual endpoint
+            const response = await fetch('http://127.0.0.1:8000/events');
             const data: Event[] = await response.json();
             setEvents(data);
-            setCurrentEventIndex(0); // Reset to the first event after fetching new events
+            setCurrentEventIndex(0);
         } catch (error) {
             console.error('Failed to fetch events:', error);
-            // Define mock data in case of an error
-            const mockData: Event[] = [{
-                title: 'Sample Event',
-                description: 'This is a sample event description.',
-                date: '2022-12-31',
-                location: 'Sample Location',
-                time: '12:00',
-            }];
-            setEvents(mockData);
         }
     };
 
     useEffect(() => {
         fetchEvents();
-        const fetchInterval = setInterval(fetchEvents, 5 * 60 * 1000); // Fetch events every 5 minutes
-
-        return () => clearInterval(fetchInterval); // Cleanup on component unmount
     }, []);
 
     useEffect(() => {
-        if (events.length > 0) {
-            const displayInterval = setInterval(() => {
-                setCurrentEventIndex((prevIndex) => (prevIndex + 1) % events.length); // Cycle through events
-            }, 30 * 1000);
+        const intervalTime = 30000; // 30 seconds
+        const updateInterval = 100; // Update progress every 100ms
 
-            return () => clearInterval(displayInterval); // Cleanup on component unmount
-        }
+        const displayInterval = setInterval(() => {
+            setCurrentEventIndex((prevIndex) => (prevIndex + 1) % events.length);
+            setProgress(0); // Reset progress for the next event
+        }, intervalTime);
+
+        const progressInterval = setInterval(() => {
+            setProgress((oldProgress) => {
+                const increment = 100 * updateInterval / intervalTime;
+                return oldProgress + increment > 100 ? 100 : oldProgress + increment;
+            });
+        }, updateInterval);
+
+        return () => {
+            clearInterval(displayInterval);
+            clearInterval(progressInterval);
+        };
     }, [events]);
 
-    // Check if there are any events before trying to access the current event
-    const currentEvent = events.length > 0 ? events[currentEventIndex] : null;
+    const currentEvent = events[currentEventIndex];
 
     return (
         <main className="grid grid-cols-3 grid-rows-6 min-h-screen max-h-screen dark:text-[#ececec]">
@@ -72,14 +76,15 @@ export default function Home() {
             ) : (
                 <div>Loading events...</div>
             )}
+
+            {/* Progress Bar */}
+            <div className="w-full bg-gray-200 h-2 col-span-full">
+                <div className="bg-blue-500 h-2 w-max" style={{ width: `${progress}%` }}></div>
+            </div>
+
+            {/* Rest of your component */}
         </main>
     );
-}
+};
 
-interface Event {
-    title: string;
-    description: string;
-    date: string;
-    location: string;
-    time: string;
-}
+export default Home;
