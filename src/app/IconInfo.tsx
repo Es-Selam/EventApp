@@ -10,7 +10,7 @@ interface IconInfoProps {
 
 const IconInfo: React.FC<IconInfoProps> = ({ icon, text, additionalClasses }) => {
     return (
-        <div className={`flex items-center justify-center border-4 text-center text-xl
+        <div className={`flex items-center justify-center text-center text-xl
          sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl ${additionalClasses}`}>
             <FontAwesomeIcon
                 icon={icon}

@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de" className="dark">
-      <body className="font-mono bg-gray-300 dark:bg-[#212121]">{children}</body>
+      <body className="font-mono dark:bg-[#212121]">{children}</body>
     </html>
   );
 }
