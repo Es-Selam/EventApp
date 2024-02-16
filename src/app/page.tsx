@@ -22,7 +22,7 @@ const Home = () => {
 
     const fetchEvents = async () => {
         try {
-            const response = await fetch('http://127.0.0.1:8000/events');
+            const response = await fetch('https://events.es-selam.ch');
             const data: Event[] = await response.json();
             setEvents(data);
             setCurrentEventIndex(0);
