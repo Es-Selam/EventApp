@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react';
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import { faCalendarDays, faClock, faLocationDot } from "@fortawesome/free-solid-svg-icons";
-import IconInfo from "@/app/IconInfo"; // Ensure this path is correct
+import IconInfo from "@/app/IconInfo";
+import {marked} from "marked"; // Ensure this path is correct
 
 config.autoAddCss = false;
 
@@ -46,7 +47,7 @@ const Home = () => {
     }, []); // The empty dependency array means this effect runs once on mount and cleanup on unmount
 
     useEffect(() => {
-        const intervalTime = 30000; // 30 seconds
+        const intervalTime = 20000; // 30 seconds
         const updateInterval = 100; // Update progress every 100ms
 
         const displayInterval = setInterval(() => {
@@ -92,8 +93,9 @@ const Home = () => {
                     <div className="flex items-center justify-center col-span-full text-center text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold tracking-wide border-b-8 border-black dark:border-white">
                         {currentEvent.title}
                     </div>
-                    <div className="px-20 flex items-center justify-center col-span-full row-span-4 text-center sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-medium border-b-8 border-black dark:border-white">
-                        {currentEvent.description}
+                    <div className="px-20 my-auto col-span-full row-span-4
+                    text-center sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-medium"
+                         dangerouslySetInnerHTML={{ __html: marked(currentEvent.description) }}>
                     </div>
                     <IconInfo icon={faCalendarDays} text={currentEvent.date} />
                     <IconInfo icon={faLocationDot} text={currentEvent.location} />
