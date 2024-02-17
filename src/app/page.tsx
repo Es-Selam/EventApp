@@ -19,6 +19,7 @@ const Home = () => {
     const [events, setEvents] = useState<Event[]>([]);
     const [currentEventIndex, setCurrentEventIndex] = useState(0);
     const [progress, setProgress] = useState(0);
+    const [dynamicHeight, setDynamicHeight] = useState('100vh');
 
     const fetchEvents = async () => {
         try {
@@ -66,10 +67,26 @@ const Home = () => {
         };
     }, [events]);
 
+    useEffect(() => {
+        // Function to update the viewport height dynamically
+        const updateDynamicHeight = () => {
+            const vh = window.innerHeight * 0.01;
+            setDynamicHeight(`${vh * 100}px`); // Convert to pixels for inline style
+        };
+
+        // Add event listener to adjust height on window resize
+        window.addEventListener('resize', updateDynamicHeight);
+        // Set initial height on component mount
+        updateDynamicHeight();
+
+        // Cleanup to remove event listener on component unmount
+        return () => window.removeEventListener('resize', updateDynamicHeight);
+    }, []);
+
     const currentEvent = events[currentEventIndex];
 
     return (
-        <main className="grid grid-cols-3 grid-rows-6 min-h-screen max-h-screen dark:text-[#ececec]">
+        <main style={{ height: dynamicHeight }} className={`grid grid-cols-3 grid-rows-6 dark:text-[#ececec]`}>
             {currentEvent ? (
                 <>
                     <div className="flex items-center justify-center col-span-full text-center text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold tracking-wide border-b-8 border-black dark:border-white">
