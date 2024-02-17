@@ -22,6 +22,14 @@ const Home = () => {
     const [progress, setProgress] = useState(0);
     const [dynamicHeight, setDynamicHeight] = useState('100vh');
 
+    function formatDate(isoDateString:string) {
+        const date = new Date(isoDateString);
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0'); // +1 because months are 0-indexed
+        const year = date.getFullYear();
+        return `${day}.${month}.${year}`;
+    }
+
     const fetchEvents = async () => {
         try {
             const response = await fetch('https://events.es-selam.ch');
@@ -129,7 +137,7 @@ const Home = () => {
                     text-center sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-medium"
                          dangerouslySetInnerHTML={{ __html: marked(currentEvent.description) }}>
                     </div>
-                    <IconInfo icon={faCalendarDays} text={currentEvent.date} />
+                    <IconInfo icon={faCalendarDays} text={formatDate(currentEvent.date)} />
                     <IconInfo icon={faLocationDot} text={currentEvent.location} />
                     <IconInfo icon={faClock} text={currentEvent.time} />
                 </>
