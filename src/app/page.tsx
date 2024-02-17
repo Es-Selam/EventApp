@@ -107,8 +107,6 @@ const Home = () => {
             <div className="w-full bg-gray-200 h-2 col-span-full">
                 <div className="bg-blue-500 h-2 w-max" style={{ width: `${progress}%` }}></div>
             </div>
-
-            {/* Rest of your component */}
         </main>
     );
 };
