@@ -132,7 +132,8 @@ const Home = () => {
                 <>
                     <div className="grid grid-cols-6 col-span-full">
                         <div
-                            className="flex items-center justify-center col-span-1 text-center border-b-8 border-black dark:border-white">
+                            className="flex items-center justify-center col-span-1 text-center border-b-8 border-black dark:border-white
+                            sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl" style={{ fontFamily: "'Permanent Marker', cursive" }}>
                             Kids
                         </div>
                         <div style={{fontSize: titleFontSize}} className="flex items-center justify-center col-span-4 text-center
