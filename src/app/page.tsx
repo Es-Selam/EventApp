@@ -143,7 +143,7 @@ const Home = () => {
                         </div>
                         <div
                             className="flex items-center justify-center col-span-1 text-center border-b-8 border-black dark:border-white">
-                            <img src="/es_selam_logo.svg" alt="Es-Selam Logo" className="max-w-[60%] md:p-2 h-auto"/>
+                            <img src="/es_selam_logo.svg" alt="Es-Selam Logo" className="max-w-[60%] xl:max-w-[40%] 2xl:max-w-[30%] md:p-2 h-auto"/>
                         </div>
                     </div>
                     <div className="px-20 my-auto col-span-full row-span-4
