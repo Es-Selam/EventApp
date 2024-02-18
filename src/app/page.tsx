@@ -14,6 +14,7 @@ interface Event {
     date: string;
     location: string;
     time: string;
+    calendarName: string; // New field for the calendar name
 }
 
 const Home = () => {
@@ -134,7 +135,7 @@ const Home = () => {
                         <div
                             className="flex items-center justify-center col-span-1 text-center border-b-8 border-black dark:border-white
                             sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl" style={{ fontFamily: "'Permanent Marker', cursive" }}>
-                            Kids
+                            {currentEvent.calendarName}
                         </div>
                         <div style={{fontSize: titleFontSize}} className="flex items-center justify-center col-span-4 text-center
                      text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold tracking-wide border-b-8 border-black dark:border-white">
