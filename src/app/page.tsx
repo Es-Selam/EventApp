@@ -130,15 +130,26 @@ const Home = () => {
         <main style={{ height: dynamicHeight }} className={`grid grid-cols-3 grid-rows-6 dark:text-[#ececec]`}>
             {currentEvent ? (
                 <>
-                    <div style={{ fontSize: titleFontSize }} className="flex items-center justify-center col-span-full text-center text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold tracking-wide border-b-8 border-black dark:border-white">
-                        {currentEvent.title}
+                    <div className="grid grid-cols-6 col-span-full">
+                        <div
+                            className="flex items-center justify-center col-span-1 text-center border-b-8 border-black dark:border-white">
+                            Kids
+                        </div>
+                        <div style={{fontSize: titleFontSize}} className="flex items-center justify-center col-span-4 text-center
+                     text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold tracking-wide border-b-8 border-black dark:border-white">
+                            {currentEvent.title}
+                        </div>
+                        <div
+                            className="flex items-center justify-center col-span-1 text-center border-b-8 border-black dark:border-white">
+                            <img src="/es_selam_logo.svg" alt="Es-Selam Logo" className="max-w-[60%] md:p-2 h-auto"/>
+                        </div>
                     </div>
                     <div className="px-20 my-auto col-span-full row-span-4
                     text-center sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-medium"
-                         dangerouslySetInnerHTML={{ __html: marked(currentEvent.description) }}>
+                         dangerouslySetInnerHTML={{__html: marked(currentEvent.description)}}>
                     </div>
-                    <IconInfo icon={faCalendarDays} text={formatDate(currentEvent.date)} />
-                    <IconInfo icon={faLocationDot} text={currentEvent.location} />
+                    <IconInfo icon={faCalendarDays} text={formatDate(currentEvent.date)}/>
+                    <IconInfo icon={faLocationDot} text={currentEvent.location}/>
                     <IconInfo icon={faClock} text={currentEvent.time} />
                 </>
             ) : (
