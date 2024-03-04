@@ -5,6 +5,7 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import { faCalendarDays, faClock, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import IconInfo from "@/app/IconInfo";
 import {marked} from "marked"; // Ensure this path is correct
+import ScrollingText from './ScrollingText'; 
 
 config.autoAddCss = false;
 
@@ -146,10 +147,9 @@ const Home = () => {
                             <img src="/es_selam_logo.svg" alt="Es-Selam Logo" className="max-w-[60%] xl:max-w-[40%] 2xl:max-w-[30%] md:p-2 h-auto"/>
                         </div>
                     </div>
-                    <div className="px-20 my-auto col-span-full row-span-4
+                    <ScrollingText className="px-20 my-auto col-span-full row-span-4
                     text-center sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-medium"
-                         dangerouslySetInnerHTML={{__html: marked(currentEvent.description)}}>
-                    </div>
+                    text={currentEvent.description}/>
                     <IconInfo icon={faCalendarDays} text={formatDate(currentEvent.date)}/>
                     <IconInfo icon={faLocationDot} text={currentEvent.location}/>
                     <IconInfo icon={faClock} text={currentEvent.time} />

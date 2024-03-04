@@ -3,3 +3,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.scrolling-text-container {
+    overflow: hidden; /* Change 'show' to 'hidden' to hide the overflow */
+    position: relative;
+    height: 100%;
+    /* Set a fixed height for the container */
+}
+
+.scrolling-text {
+    position: absolute;
+    top: -100%; /* Start from above the container */
+    width: 100%; /* Ensure the width matches the container */
+    animation: scroll-text-vertical 10s linear infinite; /* Adjust animation name and timing as needed */
+}
+
+@keyframes scroll-text-vertical {
+    from {
+        top: -100%; /* Start from above the container */
+    }
+    to {
+        top: 100%; /* Scroll to the bottom */
+    }
+}
