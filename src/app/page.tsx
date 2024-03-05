@@ -3,12 +3,12 @@ import React, { useEffect, useState } from 'react';
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import { faCalendarDays, faClock, faLocationDot } from "@fortawesome/free-solid-svg-icons";
-import IconInfo from "@/app/IconInfo";
+import IconInfo from "@/app/ui/IconInfo";
 import {marked} from "marked"; // Ensure this path is correct
 
 config.autoAddCss = false;
 
-interface Event {
+export interface EventModel {
     title: string;
     description: string;
     date: string;
@@ -18,7 +18,7 @@ interface Event {
 }
 
 const Home = () => {
-    const [events, setEvents] = useState<Event[]>([]);
+    const [events, setEvents] = useState<EventModel[]>([]);
     const [currentEventIndex, setCurrentEventIndex] = useState(0);
     const [progress, setProgress] = useState(0);
     const [dynamicHeight, setDynamicHeight] = useState('100vh');
@@ -34,7 +34,7 @@ const Home = () => {
     const fetchEvents = async () => {
         try {
             const response = await fetch('https://events.es-selam.ch');
-            const data: Event[] = await response.json();
+            const data: EventModel[] = await response.json();
             setEvents(data);
             setCurrentEventIndex(0);
         } catch (error) {
@@ -151,7 +151,7 @@ const Home = () => {
                          dangerouslySetInnerHTML={{__html: marked(currentEvent.description)}}>
                     </div>
                     <IconInfo icon={faCalendarDays} text={formatDate(currentEvent.date)}/>
-                    <IconInfo icon={faLocationDot} text={currentEvent.location}/>
+                    <IconInfo icon={faLocationDot} text={currentEvent.location} />
                     <IconInfo icon={faClock} text={currentEvent.time} />
                 </>
             ) : (
