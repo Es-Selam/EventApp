@@ -47,7 +47,7 @@ const Page = () => {
                         <div
                             className="flex items-center justify-center col-span-1 overflow-hidden">
                             <img src="/es_selam_logo.svg" alt="Es-Selam Logo"
-                                 className="h-full object-contain" />
+                                 className="h-[70%] object-contain" />
                         </div>
                     </div>
 
