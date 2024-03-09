@@ -1,5 +1,4 @@
-// hooks/useEvents.js
-import {useState, useEffect, Dispatch, SetStateAction} from 'react';
+import {useState, useEffect} from 'react';
 
 export const useEvents = (url: string) => {
     const [events, setEvents] = useState([]);
@@ -22,3 +21,12 @@ export const useEvents = (url: string) => {
 
     return { events, error };
 };
+
+export interface EventModel {
+    title: string;
+    description: string;
+    date: string;
+    location: string;
+    time: string;
+    calendarName: string; // New field for the calendar name
+}

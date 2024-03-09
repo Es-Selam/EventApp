@@ -4,18 +4,10 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import { faCalendarDays, faClock, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import IconInfo from "@/app/ui/IconInfo";
-import {marked} from "marked"; // Ensure this path is correct
+import {marked} from "marked";
+import {EventModel} from "@/app/useEvents"; // Ensure this path is correct
 
 config.autoAddCss = false;
-
-export interface EventModel {
-    title: string;
-    description: string;
-    date: string;
-    location: string;
-    time: string;
-    calendarName: string; // New field for the calendar name
-}
 
 const Home = () => {
     const [events, setEvents] = useState<EventModel[]>([]);

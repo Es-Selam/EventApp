@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { useEvents } from '../useEvents'; // Assuming this is the path to your custom hook
+import {EventModel, useEvents} from '../useEvents'; // Assuming this is the path to your custom hook
 import { useDynamicHeight } from '../useDynamicHeight'; // Assuming this is the path to your custom hook
 import { formatDate } from '../lib/formatDate'; // Assuming this is the path to your utility function
 import IconInfo from "@/app/ui/IconInfo";
@@ -8,7 +8,6 @@ import { faCalendarDays, faClock, faLocationDot } from "@fortawesome/free-solid-
 import { config, library } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css"; // Import fontawesome styles
 import { marked } from "marked";
-import {EventModel} from "@/app/page";
 import {useDynamicFontSize} from "@/app/lib/dynamicFontSize";
 import {useEventIterator} from "@/app/lib/eventIterator";
 
@@ -20,7 +19,7 @@ library.add(faCalendarDays, faClock, faLocationDot);
 
 const Page = () => {
     const { events, error } = useEvents('https://events.es-selam.ch');
-    const dynamicHeight = useDynamicHeight();
+    const dynamicHeight =  useDynamicHeight();
     const { currentEventIndex, progress } = useEventIterator(events);
     const currentEvent: EventModel = events[currentEventIndex] || null;
     const dynamicFontSize = useDynamicFontSize(currentEvent?.title || '');
