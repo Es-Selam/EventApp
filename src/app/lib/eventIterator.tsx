@@ -1,29 +1,43 @@
-// hooks/useEventIterator.js
-import { useState, useEffect } from 'react';
-import {EventModel} from "@/app/lib/useEvents";
+import { useState, useEffect, useRef } from 'react';
+import { EventModel } from "@/app/lib/useEvents";
 
-export const useEventIterator = (events : EventModel[], intervalTime = 20000) => {
+export const useEventIterator = (events: EventModel[], intervalTime = 20000) => {
     const [currentEventIndex, setCurrentEventIndex] = useState(0);
     const [progress, setProgress] = useState(0);
+    const requestRef = useRef<number | null>(null);
+    const startTimeRef = useRef<number | null>(null);
+
+    const animate = (time: number) => {
+        if (startTimeRef.current === null) {
+            startTimeRef.current = time;
+        }
+        const elapsedTime = time - startTimeRef.current;
+        const progress = (elapsedTime / intervalTime) * 100;
+        setProgress(progress >= 100 ? 100 : progress); // Ensure progress doesn't exceed 100%
+
+        if (progress < 100) {
+            requestRef.current = requestAnimationFrame(animate);
+        }
+    };
 
     useEffect(() => {
-        const updateInterval = 100; // Update progress every 100ms
+        const updateProgress = () => {
+            requestRef.current = requestAnimationFrame(animate);
+        };
 
         const displayInterval = setInterval(() => {
+            startTimeRef.current = null; // Reset the start time for the next cycle
             setCurrentEventIndex((prevIndex) => (prevIndex + 1) % events.length);
-            setProgress(0); // Reset progress for the next event
+            updateProgress(); // Restart the progress animation
         }, intervalTime);
 
-        const progressInterval = setInterval(() => {
-            setProgress((oldProgress) => {
-                const increment = 100 * updateInterval / intervalTime;
-                return oldProgress + increment > 100 ? 100 : oldProgress + increment;
-            });
-        }, updateInterval);
+        updateProgress(); // Start the progress animation
 
         return () => {
             clearInterval(displayInterval);
-            clearInterval(progressInterval);
+            if (requestRef.current !== null) {
+                cancelAnimationFrame(requestRef.current);
+            }
         };
     }, [events.length, intervalTime]);
 
