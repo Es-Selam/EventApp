@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
-import {EventModel, useEvents} from '../useEvents'; // Assuming this is the path to your custom hook
-import { useDynamicHeight } from '../useDynamicHeight'; // Assuming this is the path to your custom hook
+import {EventModel, useEvents} from '../lib/useEvents'; // Assuming this is the path to your custom hook
+import { useDynamicHeight } from '../lib/useDynamicHeight'; // Assuming this is the path to your custom hook
 import { formatDate } from '../lib/formatDate'; // Assuming this is the path to your utility function
 import IconInfo from "@/app/ui/IconInfo";
 import { faCalendarDays, faClock, faLocationDot } from "@fortawesome/free-solid-svg-icons";

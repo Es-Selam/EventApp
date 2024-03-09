@@ -1,6 +1,6 @@
 // hooks/useEventIterator.js
 import { useState, useEffect } from 'react';
-import {EventModel} from "@/app/useEvents";
+import {EventModel} from "@/app/lib/useEvents";
 
 export const useEventIterator = (events : EventModel[], intervalTime = 20000) => {
     const [currentEventIndex, setCurrentEventIndex] = useState(0);

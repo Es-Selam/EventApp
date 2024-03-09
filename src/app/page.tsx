@@ -5,7 +5,7 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import { faCalendarDays, faClock, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import IconInfo from "@/app/ui/IconInfo";
 import {marked} from "marked";
-import {EventModel} from "@/app/useEvents"; // Ensure this path is correct
+import {EventModel} from "@/app/lib/useEvents"; // Ensure this path is correct
 
 config.autoAddCss = false;
 

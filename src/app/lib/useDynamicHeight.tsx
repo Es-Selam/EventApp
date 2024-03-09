@@ -1,4 +1,3 @@
-// hooks/useDynamicHeight.js
 import { useState, useEffect } from 'react';
 
 export const useDynamicHeight = () => {
