@@ -60,15 +60,17 @@ const Page = () => {
                     <IconInfo icon={faCalendarDays} text={formatDate(currentEvent.date)}/>
                     <IconInfo icon={faLocationDot} text={currentEvent.location}/>
                     <IconInfo icon={faClock} text={currentEvent.time}/>
+                    {/* Progress Bar */}
+                    <div className="col-span-full w-full h-2 bg-gray-200">
+                        <div className="h-2 bg-blue-500" style={{width: `${progress}%`}}></div>
+                    </div>
                 </>
+
             ) : (
                 <div>Loading events...</div>
             )}
 
-            {/* Progress Bar */}
-            <div className="col-span-full w-full h-2 bg-gray-200">
-                <div className="h-2 bg-blue-500" style={{width: `${progress}%`}}></div>
-            </div>
+
         </main>
     );
 };
