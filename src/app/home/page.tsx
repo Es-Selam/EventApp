@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useEvents } from '../useEvents'; // Assuming this is the path to your custom hook
 import { useDynamicHeight } from '../useDynamicHeight'; // Assuming this is the path to your custom hook
 import { formatDate } from '../lib/formatDate'; // Assuming this is the path to your utility function
@@ -10,6 +10,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css"; // Import fontawesome sty
 import { marked } from "marked";
 import {EventModel} from "@/app/page";
 import {useDynamicFontSize} from "@/app/lib/dynamicFontSize";
+import {useEventIterator} from "@/app/lib/eventIterator";
 
 // Prevent fontawesome from adding its styles since we're doing it manually
 config.autoAddCss = false;
@@ -20,32 +21,8 @@ library.add(faCalendarDays, faClock, faLocationDot);
 const Page = () => {
     const { events, error } = useEvents('https://events.es-selam.ch');
     const dynamicHeight = useDynamicHeight();
-    const [currentEventIndex, setCurrentEventIndex] = useState(0);
-    const [progress, setProgress] = useState(0);
-
-    useEffect(() => {
-        const intervalTime = 20000; // 20 seconds
-        const updateInterval = 100; // Update progress every 100ms
-
-        const displayInterval = setInterval(() => {
-            setCurrentEventIndex((prevIndex) => (prevIndex + 1) % events.length);
-            setProgress(0); // Reset progress for the next event
-        }, intervalTime);
-
-        const progressInterval = setInterval(() => {
-            setProgress((oldProgress) => {
-                const increment = 100 * updateInterval / intervalTime;
-                return oldProgress + increment > 100 ? 100 : oldProgress + increment;
-            });
-        }, updateInterval);
-
-        return () => {
-            clearInterval(displayInterval);
-            clearInterval(progressInterval);
-        };
-    }, [events.length]);
-
-    const currentEvent : EventModel = events[currentEventIndex] || null;
+    const { currentEventIndex, progress } = useEventIterator(events);
+    const currentEvent: EventModel = events[currentEventIndex] || null;
     const dynamicFontSize = useDynamicFontSize(currentEvent?.title || '');
 
     if (error) {
