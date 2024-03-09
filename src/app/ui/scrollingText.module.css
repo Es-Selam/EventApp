@@ -1,0 +1,21 @@
+.scrollingTextContainer {
+    overflow: hidden;
+    position: relative;
+    height: 100%; /* Example height, adjust as needed */
+}
+
+.scrollingText {
+    position: relative;
+    top: -100%;
+    width: 100%;
+    animation: scrollTextVertical 15s linear infinite;
+}
+
+@keyframes scrollTextVertical {
+    from {
+        top: -80%;
+    }
+    to {
+        top: 80%;
+    }
+}
