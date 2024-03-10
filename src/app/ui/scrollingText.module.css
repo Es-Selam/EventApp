@@ -1,21 +1,23 @@
+/* ScrollingText.module.css */
 .scrollingTextContainer {
     overflow: hidden;
     position: relative;
-    height: 100%; /* Example height, adjust as needed */
+    height: 100%; /* Set a specific height */
+    display: flex;
+    align-items: center; /* Start from middle */
 }
 
 .scrollingText {
     position: relative;
-    top: -100%;
     width: 100%;
-    animation: scrollTextVertical 15s linear infinite;
+    animation: scrollTextVertical 30s linear infinite; /* Slower animation */
 }
 
 @keyframes scrollTextVertical {
-    from {
-        top: -80%;
+    0% {
+        transform: translateY(10%); /* Start from the middle */
     }
-    to {
-        top: 80%;
+    100% {
+        transform: translateY(-100%); /* Move to the top */
     }
 }
