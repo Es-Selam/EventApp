@@ -52,7 +52,7 @@ const Page = () => {
                     </div>
 
                     {/* Event Description */}
-                    <ScrollingText className="px-20 my-auto col-span-full row-span-4
+                    <ScrollingText className="px-20 justify-center col-span-full row-span-4
                     text-center sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-medium"
                                    currentIndex={currentEventIndex}
                                    text={currentEvent.description}/>
