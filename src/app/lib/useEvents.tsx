@@ -17,6 +17,10 @@ export const useEvents = (url: string) => {
         };
 
         fetchEvents();
+        const intervalId = setInterval(fetchEvents, 600000);
+
+        // Clean up the interval when the component unmounts or the URL changes
+        return () => clearInterval(intervalId);
     }, [url]);
 
     return { events, error };
